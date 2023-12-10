@@ -1,0 +1,37 @@
+{% extends "./plantilla.html" %} {% block contenido %}
+<h1 class="text-center">Listado Clientes</h1>
+
+<div class="container">
+  <table class="table table-striped bordered">
+    <thead>
+      <tr class="table-success">
+        <th class="text-center" scope="col">Id</th>
+        <th class="text-center" scope="col">Cedula</th>
+        <th class="text-center" scope="col">Nombres</th>
+        <th class="text-center" scope="col">Apellidos</th>
+        <th class="text-center" scope="col">Fecha de Nacimiento</th>
+        <th class="text-center" scope="col">Correo Electronico</th>
+        <th class="text-center" scope="col">Direccion</th>
+        <th class="text-center" scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cliente in clientes %}
+      <tr>
+        <td class="text-center">{{ cliente.id }}</td>
+        <td class="text-center">{{ cliente.cedula }}</td>
+        <td class="text-center">{{cliente.nombres}}</td>
+        <td class="text-center">{{cliente.apellidos}}</td>
+        <td class="text-center">{{cliente.fecha_nacimiento}}</td>
+        <td class="text-center">{{cliente.correo_electronico}}</td>
+        <td class="text-center">{{cliente.direccion}}</td>
+        <td class="text-center">
+          <a href="" class="btn btn-outline-warning">Editar</a>
+          <a href="" class="btn btn-outline-danger">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock contenido %}
