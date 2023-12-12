@@ -1,37 +1,109 @@
-{% extends "./plantilla.html" %} {% block contenido %}
+{#Heredando código#} {% extends "./plantilla.html" %} {% block contenido %}
 <h1 class="text-center">Listado Clientes</h1>
 
-<div class="container">
-  <table class="table table-striped bordered">
-    <thead>
-      <tr class="table-success">
-        <th class="text-center" scope="col">Id</th>
-        <th class="text-center" scope="col">Cedula</th>
-        <th class="text-center" scope="col">Nombres</th>
-        <th class="text-center" scope="col">Apellidos</th>
-        <th class="text-center" scope="col">Fecha de Nacimiento</th>
-        <th class="text-center" scope="col">Correo Electronico</th>
-        <th class="text-center" scope="col">Direccion</th>
-        <th class="text-center" scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for cliente in clientes %}
-      <tr>
-        <td class="text-center">{{ cliente.id }}</td>
-        <td class="text-center">{{ cliente.cedula }}</td>
-        <td class="text-center">{{cliente.nombres}}</td>
-        <td class="text-center">{{cliente.apellidos}}</td>
-        <td class="text-center">{{cliente.fecha_nacimiento}}</td>
-        <td class="text-center">{{cliente.correo_electronico}}</td>
-        <td class="text-center">{{cliente.direccion}}</td>
-        <td class="text-center">
-          <a href="" class="btn btn-outline-warning">Editar</a>
-          <a href="" class="btn btn-outline-danger">Eliminar</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-md-5">
+    <div class="container w-50">
+      <form class="" action="/guardarCliente/" method="post">
+        {% csrf_token %}
+        <input
+          type="number"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la cedula"
+          value=""
+          name="cedula"
+          id="cedula"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese los nombres"
+          value=""
+          name="nombre"
+          id="nombre"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese los apellidos"
+          value=""
+          name="apellido"
+          id="apellido"
+        />
+        <input
+          type="date"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la fecha de nacimiento"
+          value=""
+          name="fechas_nacimiento"
+          id="fechas_nacimiento"
+        />
+        <input
+          type="email"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese su Correo Electronico"
+          value=""
+          name="correo"
+          id="correo"
+        />
+        <textarea
+          class="form-control m-3"
+          required
+          placeholder="Ingrese su direccion"
+          rows="3"
+          name="direccion"
+          id="direccion"
+        ></textarea>
+        <center>
+          <button type="submit" name="button" class="btn btn-primary">
+            Guardar</button
+          >&nbsp;&nbsp;
+          <button type="reset" name="button" class="btn btn-danger">
+            Cancelar
+          </button>
+        </center>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="container table-responsive">
+      <table class="table table-striped bordered">
+        <thead>
+          <tr class="table-success">
+            <th class="text-center" scope="col">Id</th>
+            <th class="text-center" scope="col">Cedula</th>
+            <th class="text-center" scope="col">Nombres</th>
+            <th class="text-center" scope="col">Apellidos</th>
+            <th class="text-center" scope="col">Fecha de Nacimiento</th>
+            <th class="text-center" scope="col">Correo Electronico</th>
+            <th class="text-center" scope="col">Direccion</th>
+            <th class="text-center" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cliente in clientes %}
+          <tr>
+            <td class="text-center">{{cliente.id }}</td>
+            <td class="text-center">{{cliente.cedula }}</td>
+            <td class="text-center">{{cliente.nombre}}</td>
+            <td class="text-center">{{cliente.apellido}}</td>
+            <td class="text-center">{{cliente.fechas_nacimiento}}</td>
+            <td class="text-center">{{cliente.correo}}</td>
+            <td class="text-center">{{cliente.direccion}}</td>
+            <td class="text-center">
+              <a href="" class="btn btn-outline-warning">Editar</a>
+              <a href="" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 {% endblock contenido %}
