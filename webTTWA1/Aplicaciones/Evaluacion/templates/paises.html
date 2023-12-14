@@ -1,35 +1,99 @@
 {% extends "./plantilla.html" %}{% block contenido %}
 <h1 class="text-center">Lista de Paises</h1>
-<div class="container">
-  <table class="table table-striped table-hover table-bordered">
-    <thead>
-      <tr class="table-success">
-        <th class="text-center">ID</th>
-        <th class="text-center">Nombre</th>
-        <th class="text-center">Anio de Fundacion</th>
-        <th class="text-center">Poblacion</th>
-        <th class="text-center">Moneda</th>
-        <th class="text-center">Idioma</th>
-        <th class="text-center">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for pais in paises %}
-      <tr>
-        <td class="text-center">{{ pais.id }}</td>
-        <td class="text-center">{{ pais.nombre }}</td>
-        <td class="text-center">{{ pais.anio_fundacion }}</td>
-        <td class="text-center">{{ pais.poblacion }}</td>
-        <td class="text-center">{{ pais.moneda }}</td>
-        <td class="text-center">{{ pais.idioma }}</td>
-        <td class="text-center">
-          <a href="" class="btn btn-outline-warning">Editar</a>
-          <a href="" class="btn btn-outline-danger">Eliminar</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <a href="" class="btn btn-outline-info">Nuevo</a>
+<div class="row">
+  <div class="col-md-5">
+    <div class="container w-50">
+      <form class="" action="/guardarPais/" method="post">
+        {% csrf_token %}
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese el pais"
+          value=""
+          name="nombre"
+          id="nombre"
+        />
+        <input
+          type="date"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese el año"
+          value=""
+          name="anio_fundacion"
+          id="anio_fundacion"
+        />
+        <input
+          type="number"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la poblacion"
+          value=""
+          name="poblacion"
+          id="poblacion"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la moneda"
+          value=""
+          name="moneda"
+          id="moneda"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese el idioma"
+          value=""
+          name="idioma"
+          id="idioma"
+        />
+        <center>
+          <button type="submit" name="button" class="btn btn-outline-primary">
+            Guardar</button
+          >&nbsp;&nbsp;
+          <button type="reset" name="button" class="btn btn-outline-danger">
+            Cancelar
+          </button>
+        </center>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr class="table-success">
+          <th class="text-center">ID</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Anio de Fundacion</th>
+          <th class="text-center">Poblacion</th>
+          <th class="text-center">Moneda</th>
+          <th class="text-center">Idioma</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pais in paises %}
+        <tr>
+          <td class="text-center">{{ pais.id }}</td>
+          <td class="text-center">{{ pais.nombre }}</td>
+          <td class="text-center">{{ pais.anio_fundacion }}</td>
+          <td class="text-center">{{ pais.poblacion }}</td>
+          <td class="text-center">{{ pais.moneda }}</td>
+          <td class="text-center">{{ pais.idioma }}</td>
+          <td class="text-center">
+            <a href="" class="btn btn-outline-warning">Editar</a>
+            <a href="/eliminarPais/{{pais.id}}" class="btn btn-outline-danger"
+              >Eliminar</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
   {% endblock contenido %}
 </div>

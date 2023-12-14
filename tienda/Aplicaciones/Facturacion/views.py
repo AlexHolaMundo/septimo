@@ -14,3 +14,12 @@ def guardarCliente (request):
     direccion=request.POST['direccion']
     nuevoCliente=Cliente.objects.create(cedula=cedula, nombre=nombre, apellido=apellido, fechas_nacimiento=fechas_nacimiento, correo=correo, direccion=direccion)
     return redirect  ('/')
+
+def eliminarCliente (request, id):
+    clienteEliminar=Cliente.objects.get(id=id)
+    clienteEliminar.delete()
+    return redirect ('/')
+
+def editarCliente (request, id):
+    clienteEditar=Cliente.objects.get(id=id)
+    return render (request, 'editarCliente.html', {'cliente': clienteEditar})
