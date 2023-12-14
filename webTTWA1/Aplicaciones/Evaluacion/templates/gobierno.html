@@ -1,56 +1,85 @@
 {% extends "./plantilla.html" %} {% block contenido %}
 <h1 class="text-center">Lista de Gobiernos</h1>
-<div class="row">
+<div class="row m-0 p-0">
   <div class="col-md-5">
-    <div class="container w-50">
-      <form action="/guardarGobierno/" method="post">
+    <div class="container w-100">
+      <form action="/guardarGobierno/" method="post" class="p-4 border">
         {% csrf_token %}
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese el tipo"
-          value=""
-          name="tipo_gobierno"
-          id="tipo_gobierno"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese el presidente"
-          value=""
-          name="presidente"
-          id="presidente"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese la forma juridica"
-          value=""
-          name="forma_juridica"
-          id="forma_juridica"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese el sistema politico"
-          value=""
-          name="sistema_politico"
-          id="sistema_politico"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese la deuda externa"
-          value=""
-          name="deuda_externa"
-          id="deuda_externa"
-        />
-        <center>
+        <h5 class="text-center">Registrar Gobierno</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="m-1">
+              <label for="" class="form-label m-1">Tipo de Gobierno</label>
+              <input
+                type="text"
+                required
+                class="form-control"
+                placeholder="Ingrese el tipo"
+                value=""
+                name="tipo_gobierno"
+                id="tipo_gobierno"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="m-1">
+              <label for="" class="form-label m-1">Presidente</label>
+              <input
+                type="text"
+                required
+                class="form-control"
+                placeholder="Ingrese el presidente"
+                value=""
+                name="presidente"
+                id="presidente"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="m-1">
+              <label for="" class="form-label m-1">Forma Juridica</label>
+              <input
+                type="text"
+                required
+                class="form-control"
+                placeholder="Ingrese la forma juridica"
+                value=""
+                name="forma_juridica"
+                id="forma_juridica"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="m-1">
+              <label for="" class="form-label m-1">Sistema Politico</label>
+              <input
+                type="text"
+                required
+                class="form-control"
+                placeholder="Ingrese el sistema politico"
+                value=""
+                name="sistema_politico"
+                id="sistema_politico"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="m-1">
+          <label for="" class="form-label m-1">Deduda Externa</label>
+          <input
+            type="text"
+            required
+            class="form-control"
+            placeholder="Ingrese la deuda externa"
+            value=""
+            name="deuda_externa"
+            id="deuda_externa"
+          />
+        </div>
+        <center class="m-3">
           <button type="submit" name="button" class="btn btn-outline-primary">
             Guardar
           </button>
@@ -63,6 +92,7 @@
     </div>
   </div>
   <div class="col-md-7">
+    <h5 class="text-center">Gobiernos</h5>
     <table class="table table-striped table-hover table-bordered">
       <thead>
         <tr class="table-success">
