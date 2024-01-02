@@ -1,0 +1,82 @@
+{% extends "./plantilla.html" %} {% block contenido %} {% load static %}
+<h1 class="text-center">Editar Cliente</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="" action="/procesarActualizacionCliente/" method="post">
+        {% csrf_token %}
+        <input
+          type="hidden"
+          required
+          class="form-control m-3"
+          placeholder="ID"
+          value="{{cliente.id}}"
+          name="id"
+          id="id"
+        />
+        <input
+          type="number"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la cedula"
+          value="{{cliente.cedula}}"
+          name="cedula"
+          id="cedula"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese los nombres"
+          value="{{cliente.nombre}}"
+          name="nombre"
+          id="nombre"
+        />
+        <input
+          type="text"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese los apellidos"
+          value="{{cliente.apellido}}"
+          name="apellido"
+          id="apellido"
+        />
+        <input
+          type="date"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese la fecha de nacimiento"
+          value="{{cliente.fechas_nacimiento|date:'Y-m-d'}}"
+          name="fechas_nacimiento"
+          id="fechas_nacimiento"
+        />
+        <input
+          type="email"
+          required
+          class="form-control m-3"
+          placeholder="Ingrese su Correo Electronico"
+          value="{{ cliente.correo }}"
+          name="correo"
+          id="correo"
+        />
+        <textarea
+          class="form-control m-3"
+          required
+          placeholder="Ingrese su direccion"
+          rows="3"
+          name="direccion"
+          id="direccion"
+        >
+{{cliente.direccion}}</textarea
+        >
+        <center>
+          <button type="submit" name="button" class="btn btn-success">
+            Actualizar</button
+          >&nbsp;&nbsp;
+          <a href="/" class="btn btn-outline-warning m-1">Cancelar</a>
+        </center>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

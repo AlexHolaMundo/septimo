@@ -1,7 +1,7 @@
-{#Heredando código#} {% extends "./plantilla.html" %} {% block contenido %}
+{% extends "./plantilla.html" %} {% block contenido %} {% load static %}
 <h1 class="text-center">Listado Clientes</h1>
 
-<div class="row">
+<div class="row m-0">
   <div class="col-md-5">
     <div class="container w-50">
       <form class="" action="/guardarCliente/" method="post">
@@ -72,6 +72,9 @@
   </div>
   <div class="col-md-7">
     <div class="container table-responsive">
+      <center>
+        <img src="{% static 'img/utc.png' %}" alt="" />
+      </center>
       <table class="table table-striped bordered">
         <thead>
           <tr class="table-success">
@@ -102,9 +105,10 @@
                 >Editar</a
               >
               <a
-                href="/eliminarCliente/{{cliente.id}}"
+                href="javascript:void(0);"
                 type="button"
                 class="btn btn-outline-danger m-1"
+                onclick="eliminarCliente('/eliminarCliente/{{cliente.id}}');"
                 >Eliminar</a
               >
             </td>
@@ -115,4 +119,37 @@
     </div>
   </div>
 </div>
-{% endblock contenido %}
+
+<script type="text/javascript">
+  function eliminarCliente(url) {
+    iziToast.question({
+      timeout: 15000,
+      close: true,
+      overlay: true,
+      displayMode: 'once',
+      id: 'question',
+      zindex: 999,
+      title: 'CONFIRMACIÓN',
+      message: '¿Está seguro de eliminar el cliente seleccionado?',
+      position: 'center',
+      buttons: [
+        [
+          '<button><b>SI</b></button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+            window.location.href = url
+          },
+          true,
+        ],
+        [
+          '<button>NO</button>',
+          function (instance, toast) {
+            instance.hide({ transitionOut: 'fadeOut' }, toast, 'button')
+          },
+        ],
+      ],
+    })
+  }
+</script>
+
+{% endblock %}
