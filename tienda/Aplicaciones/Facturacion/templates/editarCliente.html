@@ -14,53 +14,71 @@
           name="id"
           id="id"
         />
+
+        <label for="" class="form-label">Tipo de cliente</label>
+        <select name="id_tipo" required class="form-control m-1" id="id_tipo">
+          <option value="" disabled>-- Seleccione una opcion --</option>
+          {% for tipo in tipos %}
+          <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+          {% endfor %}
+        </select>
+        <script>
+          document.getElementById('id_tipo').value = '{{cliente.tipo.id}}'
+        </script>
+
+        <label for="" class="form-label">Cedula</label>
         <input
           type="number"
           required
-          class="form-control m-3"
+          class="form-control m-1"
           placeholder="Ingrese la cedula"
           value="{{cliente.cedula}}"
           name="cedula"
           id="cedula"
         />
+        <label for="" class="form-label"></label>
         <input
           type="text"
           required
-          class="form-control m-3"
+          class="form-control m-1"
           placeholder="Ingrese los nombres"
           value="{{cliente.nombre}}"
           name="nombre"
           id="nombre"
         />
+        <label for="" class="form-label"></label>
         <input
           type="text"
           required
-          class="form-control m-3"
+          class="form-control m-1"
           placeholder="Ingrese los apellidos"
           value="{{cliente.apellido}}"
           name="apellido"
           id="apellido"
         />
+        <label for="" class="form-label"></label>
         <input
           type="date"
           required
-          class="form-control m-3"
+          class="form-control m-1"
           placeholder="Ingrese la fecha de nacimiento"
           value="{{cliente.fechas_nacimiento|date:'Y-m-d'}}"
           name="fechas_nacimiento"
           id="fechas_nacimiento"
         />
+        <label for="" class="form-label"></label>
         <input
           type="email"
           required
-          class="form-control m-3"
+          class="form-control m-1"
           placeholder="Ingrese su Correo Electronico"
           value="{{ cliente.correo }}"
           name="correo"
           id="correo"
         />
+        <label for="" class="form-label"></label>
         <textarea
-          class="form-control m-3"
+          class="form-control m-1"
           required
           placeholder="Ingrese su direccion"
           rows="3"

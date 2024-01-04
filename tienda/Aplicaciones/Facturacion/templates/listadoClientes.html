@@ -6,53 +6,92 @@
     <div class="container w-50">
       <form class="" action="/guardarCliente/" method="post">
         {% csrf_token %}
-        <input
-          type="number"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese la cedula"
-          value=""
-          name="cedula"
-          id="cedula"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese los nombres"
-          value=""
-          name="nombre"
-          id="nombre"
-        />
-        <input
-          type="text"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese los apellidos"
-          value=""
-          name="apellido"
-          id="apellido"
-        />
-        <input
-          type="date"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese la fecha de nacimiento"
-          value=""
-          name="fechas_nacimiento"
-          id="fechas_nacimiento"
-        />
-        <input
-          type="email"
-          required
-          class="form-control m-3"
-          placeholder="Ingrese su Correo Electronico"
-          value=""
-          name="correo"
-          id="correo"
-        />
+        <div class="row">
+          <div class="col-md-6">
+            <label for="" class="form-label"> Tipo de cliente</label>
+            <select
+              name="id_tipo"
+              required
+              class="form-control m-1"
+              id="id_tipo"
+            >
+              <option value="" disabled class="">
+                -- Seleccione una opcion --
+              </option>
+              {% for tipo in tipos %}
+              <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Cedula</label>
+            <input
+              type="number"
+              required
+              class="form-control m-1"
+              placeholder="Ingrese la cedula"
+              value=""
+              name="cedula"
+              id="cedula"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="" class="form-label">Nombres</label>
+            <input
+              type="text"
+              required
+              class="form-control m-1"
+              placeholder="Ingrese los nombres"
+              value=""
+              name="nombre"
+              id="nombre"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Apellido</label>
+            <input
+              type="text"
+              required
+              class="form-control m-1"
+              placeholder="Ingrese los apellidos"
+              value=""
+              name="apellido"
+              id="apellido"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="" class="form-label">Fecha de nacimiento</label>
+            <input
+              type="date"
+              required
+              class="form-control m-1"
+              placeholder="Ingrese la fecha de nacimiento"
+              value=""
+              name="fechas_nacimiento"
+              id="fechas_nacimiento"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Correo Electronico</label>
+            <input
+              type="email"
+              required
+              class="form-control m-1"
+              placeholder="Ingrese su Correo Electronico"
+              value=""
+              name="correo"
+              id="correo"
+            />
+          </div>
+        </div>
+
+        <label for="" class="form-label">Direccion</label>
         <textarea
-          class="form-control m-3"
+          class="form-control m-1"
           required
           placeholder="Ingrese su direccion"
           rows="3"
@@ -85,6 +124,7 @@
             <th class="text-center" scope="col">Fecha de Nacimiento</th>
             <th class="text-center" scope="col">Correo Electronico</th>
             <th class="text-center" scope="col">Direccion</th>
+            <th class="text-center" scope="col">Tipo</th>
             <th class="text-center" scope="col">Acciones</th>
           </tr>
         </thead>
@@ -97,6 +137,7 @@
             <td class="text-center">{{cliente.apellido}}</td>
             <td class="text-center">{{cliente.fechas_nacimiento}}</td>
             <td class="text-center">{{cliente.correo}}</td>
+            <td class="text-center">{{cliente.tipo.nombre}}</td>
             <td class="text-center">{{cliente.direccion}}</td>
             <td class="text-center">
               <a
