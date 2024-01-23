@@ -1,0 +1,12 @@
+/*Estilos para jquery validate*/
+label.error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 5px;
+}
+input.error,
+select.error,
+textarea.error {
+  border: 1px dotted red;
+}

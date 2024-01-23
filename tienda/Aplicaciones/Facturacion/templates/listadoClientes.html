@@ -2,9 +2,16 @@
 <h1 class="text-center">Listado Clientes</h1>
 
 <div class="row m-0">
-  <div class="col-md-5">
-    <div class="container w-50">
-      <form class="" action="/guardarCliente/" method="post">
+  <div class="col-md-4">
+    <div class="container w-100">
+      <form
+        class="border p-4"
+        action="/guardarCliente/"
+        method="post"
+        enctype="multipart/form-data"
+        id="frm_nuevo_cliente"
+      >
+        <h4 class="text-center">Registrar un Cliente</h4>
         {% csrf_token %}
         <div class="row">
           <div class="col-md-6">
@@ -15,9 +22,7 @@
               class="form-control m-1"
               id="id_tipo"
             >
-              <option value="" disabled class="">
-                -- Seleccione una opcion --
-              </option>
+              <option value="" class="">-- Seleccione una opcion --</option>
               {% for tipo in tipos %}
               <option value="{{tipo.id}}">{{tipo.nombre}}</option>
               {% endfor %}
@@ -93,15 +98,28 @@
         <textarea
           class="form-control m-1"
           required
-          placeholder="Ingrese su direccion"
+          placeholder="Ingresek su direccion"
           rows="3"
           name="direccion"
           id="direccion"
         ></textarea>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="" class="form-label">Fotografia</label>
+            <input
+              type="file"
+              accept="image/*"
+              class="form-control m-1"
+              value=""
+              name="fotografia"
+              id="fotografia"
+            />
+          </div>
+        </div>
         <center>
           <button type="submit" name="button" class="btn btn-primary">
             Guardar</button
-          >&nbsp;&nbsp;
+          >&nbsp;
           <button type="reset" name="button" class="btn btn-danger">
             Cancelar
           </button>
@@ -109,12 +127,12 @@
       </form>
     </div>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-8">
     <div class="container table-responsive">
       <center>
         <img src="{% static 'img/utc.png' %}" alt="" />
       </center>
-      <table class="table table-striped bordered">
+      <table class="table table-striped bordered" id="tbl_clientes">
         <thead>
           <tr class="table-success">
             <th class="text-center" scope="col">Id</th>
@@ -123,8 +141,9 @@
             <th class="text-center" scope="col">Apellidos</th>
             <th class="text-center" scope="col">Fecha de Nacimiento</th>
             <th class="text-center" scope="col">Correo Electronico</th>
-            <th class="text-center" scope="col">Direccion</th>
             <th class="text-center" scope="col">Tipo</th>
+            <th class="text-center" scope="col">Direccion</th>
+            <th class="text-center" scope="col">Fotografia</th>
             <th class="text-center" scope="col">Acciones</th>
           </tr>
         </thead>
@@ -139,6 +158,21 @@
             <td class="text-center">{{cliente.correo}}</td>
             <td class="text-center">{{cliente.tipo.nombre}}</td>
             <td class="text-center">{{cliente.direccion}}</td>
+            <td class="text-center">
+              {% if cliente.fotografia %}
+              <a href="{{cliente.fotografia.url}}" target="_blank">
+                <img
+                  src="{{cliente.fotografia.url}}"
+                  alt=""
+                  width="50px"
+                  height="50px"
+                />
+              </a>
+              {% else %}
+              <b>N/A</b>
+              {% endif %}
+            </td>
+
             <td class="text-center">
               <a
                 href="/editarCliente/{{cliente.id}}"
@@ -192,5 +226,108 @@
     })
   }
 </script>
+<script>
+  $('#frm_nuevo_cliente').validate({
+    rules: {
+      id_tipo: {
+        required: true,
+      },
+      cedula: {
+        required: true,
+        number: true,
+        minlength: 10,
+        maxlength: 10,
+      },
+      nombre: {
+        required: true,
+        number: false,
+        minlength: 3,
+        maxlength: 50,
+      },
+      apellido: {
+        required: true,
+        number: false,
+        minlength: 3,
+        maxlength: 50,
+      },
+      fechas_nacimiento: {
+        required: true,
+        date: true,
+      },
+      correo: {
+        required: true,
+        email: true,
+      },
+      direccion: {
+        required: true,
+        minlength: 10,
+        maxlength: 100,
+      },
+      fotografia: {
+        required: true,
+        extension: 'jpg|png|jpeg',
+      },
+    },
+    messages: {
+      id_tipo: {
+        required: 'Seleccione un tipo de cliente',
+      },
+      cedula: {
+        required: 'El numero de cedula es obligatorio',
+        number: 'Solo se permiten numeros en este campo',
+        minlength: 'La cedula debe tener 10 digitos como minimo',
+        maxlength: 'La cedula debe tener 10 digitos como maximo',
+      },
+      nombre: {
+        required: 'Los nombres son obligatorios',
+        number: 'Solo se permiten letras en este campo',
+        minlength: 'El nombre debe tener como minimo 3 caracteres',
+        maxlength: 'El nombre debe tener como maximo 50 caracteres',
+      },
+      apellido: {
+        required: 'Los apellidos son obligatorios',
+        number: 'Este campo solo permite letras',
+        minlength: 'El apellido debe tener como minimo 3 caracteres',
+        maxlength: 'El apellido debe tener como maximo 50 caracteres',
+      },
+      fechas_nacimiento: {
+        required: 'La fecha de nacimiento es obligatoria',
+        date: 'Ingrese una fecha valida',
+      },
+      correo: {
+        required: 'El correo es obligatorio',
+        email: 'Ingrese un correo valido',
+      },
+      direccion: {
+        required: 'La direccion es obligatoria',
+        minlength: 'Ingrese minimo 3 caracteres',
+        maxlength: 'Ingrese maximo 100 caracteres',
+      },
+      fotografia: {
+        required: 'Seleccione una fotografia',
+        extension: 'Ingrese una imagen valida',
+      },
+    },
+  })
+</script>
+<script>
+  let table = $('#tbl_clientes').DataTable({
+    searching: true,
+    fixedHeader: true,
+    paging: true,
+    info: true,
+    language: {
+      url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json',
+    },
+    dom: 'Bfrtip',
+    buttons: [
+      { extend: 'pdfHtml5', messageTop: 'PDF DE ALEX' },
+      'print',
+      'excel',
+      'csv',
+    ],
+  })
+</script>
+<script></script>
 
 {% endblock %}

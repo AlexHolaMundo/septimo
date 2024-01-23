@@ -17,6 +17,7 @@ class Cliente(models.Model):
     fechas_nacimiento=models.DateField()
     correo=models.EmailField()
     tipo=models.ForeignKey(Tipo, null=True, blank=True, on_delete=models.PROTECT)
+    fotografia=models.FileField(upload_to='clientes', null=True, blank=True)
     def __str__(self):
         fila="{0} => {1} => {2} => {3} => {4} => {5} => {6} => {7}"
-        return fila.format(self.id, self.tipo,self.cedula,self.apellido,self.nombre,self.direccion,self.fechas_nacimiento,self.correo)
+        return fila.format(self.id,self.cedula,self.apellido,self.nombre,self.direccion,self.fechas_nacimiento,self.correo)
